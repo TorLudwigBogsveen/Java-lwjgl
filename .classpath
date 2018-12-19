@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Engine/LWJGL-3/natives"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/natives/lwjgl-glfw-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/natives/lwjgl-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/natives/lwjgl-openal-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/natives/lwjgl-opengl-natives-windows.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/jars/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/jars/lwjgl-glfw.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/jars/lwjgl-openal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ludwig Bogsveen/Documents/Programming/java/lib/LWJGL-3/jars/lwjgl-opengl.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
