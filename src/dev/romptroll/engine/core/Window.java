@@ -61,6 +61,4 @@ public class Window {
 		this.width = width;
 		this.height = height;
 	}
-	
-	
 }
