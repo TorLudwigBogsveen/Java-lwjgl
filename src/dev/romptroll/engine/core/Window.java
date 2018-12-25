@@ -4,22 +4,28 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+import java.nio.IntBuffer;
+
 import org.lwjgl.glfw.GLFWWindowCloseCallback;
+import org.lwjgl.opengl.GL;
 
 
 
-public class Window {
+public class Window implements Disposable {
 	
 	/*Represents the title and size of the current window.
 	 *Variables should be not be accessed directly instead use the setters and getters associated with the variables.*/
 	private String title;
-	private int width, height;
 	
 	/*Reference to an GLFW window should not be visible by implementations of the Window class*/
-	public long window;
+	private long window_ptr;
 	
 	public Window(int width, int height, String title) {
-		
+		this.title = title;
+		initWindow(width, height, title);
+	}
+	
+	private void initWindow(int width, int height, String title) {
 		//TODO only call this method once!
 		if(!glfwInit()) {
 			System.err.println("GLFW wasnt initialized corectly!!!");
@@ -27,14 +33,15 @@ public class Window {
 		}
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-		window = glfwCreateWindow(width, height, title, 0, 0);
-		if(window == NULL) {
+		window_ptr = glfwCreateWindow(width, height, title, 0, 0);
+		if(window_ptr == NULL) {
 			System.err.println("Window wasnt initialized corectly!!!");
 			return;
 		}
-		glfwSetWindowCloseCallback(window,  new GLFWWindowCloseCallback() {
+		glfwSetWindowCloseCallback(window_ptr,  new GLFWWindowCloseCallback() {
 			public void invoke(long arg0) {
-				System.out.println("exit");
+				glfwDestroyWindow(window_ptr);
+				System.exit(0);
 			}
 		});
 	}
@@ -44,23 +51,45 @@ public class Window {
 	}
 	
 	public void setTitle(String title) {
-		//TODO change the title of the GLFW window.
+		glfwSetWindowTitle(window_ptr, title);
 		this.title = title;
 	}
 	
 	public int getWidth() {
-		return width;
+		IntBuffer width = IntBuffer.allocate(1);
+		IntBuffer height = IntBuffer.allocate(1);;
+		glfwGetWindowSize(window_ptr, width, height);
+		return width.get(0);
+
 	}
 	
 	public int getHeight() {
-		return height;
+		IntBuffer width = IntBuffer.allocate(1);
+		IntBuffer height = IntBuffer.allocate(1);
+		glfwGetWindowSize(window_ptr, width, height);
+		return height.get(0);
 	}
 	
 	public void rezise(int width, int height) {
-		glfwSetWindowSize(window, width, height);
-		this.width = width;
-		this.height = height;
+		glfwSetWindowSize(window_ptr, width, height);
 	}
 	
+	public void setInputHandler(InputHandler input) {
+		glfwSetKeyCallback(window_ptr, input);
+	}
+
+	public void swapBuffers() {
+		glfwSwapBuffers(window_ptr);
+	}
+
+	@Override
+	public void dispose() {
+		glfwDestroyWindow(window_ptr);
+	}
+	
+	public static void setContext(Window window) {
+		glfwMakeContextCurrent(window.window_ptr);
+		GL.createCapabilities();
+	}
 	
 }
