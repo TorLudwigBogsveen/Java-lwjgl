@@ -42,11 +42,11 @@ public class Main implements Application {
 		camera = new Camera(Engine.renderer);
 				
 		set = new TiledSet();
-		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile0.png")));
-		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile1.png")));
-		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile2.png")));
-		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile3.png")));
-		map = TiledMapLoader.loadSimpleMap("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\map.txt", set);
+		set.addTile(new Tile(new Texture("tilemap/tile0.png")));
+		set.addTile(new Tile(new Texture("tilemap/tile1.png")));
+		set.addTile(new Tile(new Texture("tilemap/tile2.png")));
+		set.addTile(new Tile(new Texture("tilemap/tile3.png")));
+		map = TiledMapLoader.loadSimpleMap("tilemap/map.txt", set);
 		map.setTileSize(8, 8);
 		ren = new TiledMapRenderer(Engine.renderer);
 	}
