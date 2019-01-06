@@ -38,6 +38,10 @@ public class Main implements Application {
 				float angle = (float) Math.atan2(input.mouseX, input.mouseY);
 				renderer.rotate(angle);
 				
+				if(input.keys[GLFW_MOUSE_BUTTON_LAST]) {
+					
+				}
+				
 				if(input.keys[GLFW_KEY_W]) {
 					parent.transform.y+=2;
 				}
