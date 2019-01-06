@@ -13,4 +13,12 @@ public class TiledMap {
 	public void removeLayer(int index) {
 		layers.remove(index);
 	}
+	
+	public TiledMapLayer getLayer(int index) {
+		return layers.get(index);
+	}
+	
+	public int size() {
+		return layers.size();
+	}
 }

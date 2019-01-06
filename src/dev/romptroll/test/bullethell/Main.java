@@ -71,7 +71,7 @@ public class Main implements Application {
 		
 		GameObject player = new GameObject();
 		player.addComponent(playerScript);
-		player.addComponent(new TextureRenderer(new Texture("C:/Users/Ludwig Bogsveen/Desktop/assets/bullethell/player.png")));
+		player.addComponent(new TextureRenderer(new Texture("res/bullethell/player.png")));
 		gameScene.addObject(player);
 	}
 

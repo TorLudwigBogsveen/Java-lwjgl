@@ -4,17 +4,23 @@ import dev.romptroll.engine.graphics.Renderer;
 
 public class TiledMapRenderer {
 	
-	private Renderer renderer;
+	protected Renderer renderer;
 	
 	public TiledMapRenderer(Renderer renderer) {
 		this.renderer = renderer;
+	}
+	
+	public void drawTiledMap(TiledMap map) {
+		for(int i = 0; i < map.size(); i++) {
+			drawTiledMapLayer(map.getLayer(i));
+		}
 	}
 	
 	public void drawTiledMapLayer(TiledMapLayer layer) {
 		for(int i = 0; i < layer.getWidth(); i++) {
 			for(int j = 0; j < layer.getHeight(); j++) {
 				Tile tile = layer.getTile(i, j);
-				renderer.setColor(255, 255, 255);
+				renderer.setColor(tile.r, tile.g, tile.b);
 				renderer.drawImage(tile.texture, i*layer.getTileWidth(), j*layer.getTileHeight(), layer.getTileWidth(), layer.getTileHeight());
 			}
 		}
