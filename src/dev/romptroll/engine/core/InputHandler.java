@@ -9,12 +9,12 @@ public abstract class InputHandler implements Disposable {
 	
 	private KeyCallback keyCallback;
 	private CursorCallback cursorCallback;
-	private MouseCallback mouseCallback;
+	private MouseButtonCallback mouseButtonCallback;
 	
 	public InputHandler() {
 		keyCallback = new KeyCallback();
 		cursorCallback = new CursorCallback();
-		mouseCallback = new MouseCallback();
+		mouseButtonCallback = new MouseButtonCallback();
 	}
 	private class KeyCallback extends GLFWKeyCallback { 
 		@Override
@@ -42,7 +42,7 @@ public abstract class InputHandler implements Disposable {
 	private class CursorCallback extends GLFWCursorPosCallback {
 		@Override
 		public void invoke(long window, double xpos, double ypos) {
-			
+			mouseMoved(xpos, ypos);
 		}
 	}
 	
@@ -50,21 +50,30 @@ public abstract class InputHandler implements Disposable {
 		return cursorCallback;
 	}
 	
-	private class MouseCallback extends GLFWMouseButtonCallback {
+	private class MouseButtonCallback extends GLFWMouseButtonCallback {
 		@Override
 		public void invoke(long window, int button, int action, int mods) {
-			System.out.printf("BUTTON: %d ACTION: %d", button, action);
+			switch(action) {
+			case GLFW.GLFW_PRESS:
+				mousePressed(button);
+				break;
+			case GLFW.GLFW_RELEASE:
+				mouseReleased(button);
+				break;
+			default:
+				System.err.println("Mouse button action not defined!");
+			}
 		}
 	}
 	
-	public MouseCallback getMouseCallback() {
-		return mouseCallback;
+	public MouseButtonCallback getMouseButtonCallback() {
+		return mouseButtonCallback;
 	}
 	
 	public void dispose() {
 		keyCallback.close();
 		cursorCallback.close();
-		mouseCallback.close();
+		mouseButtonCallback.close();
 	}
 	
 	protected abstract void keyPressed(int key);
@@ -73,6 +82,11 @@ public abstract class InputHandler implements Disposable {
 	
 	protected abstract void keyRepeated(int key);
 	
-	protected abstract void mouseMoved(double xPos, double yPos);
+	protected abstract void mouseMoved(double xpos, double ypos);
+	
+	protected abstract void mousePressed(int button);
+	
+	protected abstract void mouseReleased(int button);
+
 }
 

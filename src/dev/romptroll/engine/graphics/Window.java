@@ -80,7 +80,7 @@ public class Window implements Disposable {
 	public void setInputHandler(InputHandler input) {
 		glfwSetKeyCallback(window_ptr, input.getKeyCallBack());
 		glfwSetCursorPosCallback(window_ptr, input.getCursorCallBack());
-		glfwSetMouseButtonCallback(window_ptr, input.getMouseCallback());
+		glfwSetMouseButtonCallback(window_ptr, input.getMouseButtonCallback());
 	}
 
 	public void swapBuffers() {
