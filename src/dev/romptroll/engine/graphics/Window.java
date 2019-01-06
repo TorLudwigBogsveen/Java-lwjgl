@@ -1,4 +1,4 @@
-package dev.romptroll.engine.core;
+package dev.romptroll.engine.graphics;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -8,6 +8,9 @@ import java.nio.IntBuffer;
 
 import org.lwjgl.glfw.GLFWWindowCloseCallback;
 import org.lwjgl.opengl.GL;
+
+import dev.romptroll.engine.core.Disposable;
+import dev.romptroll.engine.core.InputHandler;
 
 
 
@@ -75,7 +78,9 @@ public class Window implements Disposable {
 	}
 	
 	public void setInputHandler(InputHandler input) {
-		glfwSetKeyCallback(window_ptr, input);
+		glfwSetKeyCallback(window_ptr, input.getKeyCallBack());
+		glfwSetCursorPosCallback(window_ptr, input.getCursorCallBack());
+		glfwSetMouseButtonCallback(window_ptr, input.getMouseCallback());
 	}
 
 	public void swapBuffers() {

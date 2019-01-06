@@ -6,9 +6,11 @@ public interface Application {
 	/*
 	 *
 	 * Application interface meant to be implemented in the main class of the running program and will include
-	 * all necessary methods for updating and rendering the game.
+	 * all necessary methods for initializing updating and rendering the game.
 	 * 
 	 * */
+	
+	public void init();
 	
 	/*This method will be called once every tick and will contain all game logic.*/
 	public void update(float delta);

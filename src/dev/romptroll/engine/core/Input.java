@@ -3,20 +3,29 @@ package dev.romptroll.engine.core;
 public class Input extends InputHandler {
 	
 	public boolean keys[] = new boolean[1024];
+	
+	public int mouseX;
+	public int mouseY;
 
 	@Override
-	public void keyPressed(int key) {
+	protected void keyPressed(int key) {
 		keys[key] = true;
 	}
 
 	@Override
-	public void keyReleased(int key) {
+	protected void keyReleased(int key) {
 		keys[key] = false;
 	}
 
 	@Override
-	public void keyRepeated(int key) {
+	protected void keyRepeated(int key) {
 		
+	}
+
+	@Override
+	protected void mouseMoved(double xPos, double yPos) {
+		mouseX = (int) xPos;
+		mouseY = (int) yPos;
 	}
 
 }

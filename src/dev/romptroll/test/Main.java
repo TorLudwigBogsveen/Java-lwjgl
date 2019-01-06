@@ -8,105 +8,60 @@ import java.util.List;
 import java.util.Random;
 
 import dev.romptroll.engine.core.Application;
+import dev.romptroll.engine.core.Engine;
 import dev.romptroll.engine.core.Input;
-import dev.romptroll.engine.core.Window;
+import dev.romptroll.engine.graphics.Camera;
 import dev.romptroll.engine.graphics.Renderer;
+import dev.romptroll.engine.graphics.Texture;
+import dev.romptroll.engine.graphics.Window;
+import dev.romptroll.engine.graphics.maps.Tile;
+import dev.romptroll.engine.graphics.maps.TiledMap;
+import dev.romptroll.engine.graphics.maps.TiledMapLayer;
+import dev.romptroll.engine.graphics.maps.TiledMapLoader;
+import dev.romptroll.engine.graphics.maps.TiledMapRenderer;
+import dev.romptroll.engine.graphics.maps.TiledSet;
 
-public class Main implements Application, Runnable {
+public class Main implements Application {
 	
-	private Thread thread;
 	private Window window;
-	private Renderer renderer;
-	private Input input;
+	private Camera camera;
 	
-	public static Random rand = new Random();
-	
-	private List<Particle> particles = new ArrayList<Particle>();
-	
-	public static void main(String[] args) {
-		new Main().start();
-	}
-	
-	private void start() {
-		thread = new Thread(this, "Game");
-		thread.start();
-	}
-	
-	private void init() {
-		window = new Window(1000, 500, "Test");
-		window.setInputHandler(input = new Input());
-		Window.setContext(window);
-		renderer = new Renderer(window);
-	}
-	
-	@Override
-	public void run() {
-		init();
-		glClearColor(0.6f, 0.2f, 0.2f, 1f);
-		
-		for(int i = 0; i < 1000000; i++) {
-			particles.add(new Particle(rand.nextInt(1000)-500, rand.nextInt(500)-250, 1, 1));
-		}
-		
-		long lastTime = 0;
-		long time = 0;
-		long timer = 0;
-		float deltaTime = 0;
-		int frames = 0;
-		while(true) {
-			deltaTime = time-lastTime;
-			lastTime = time;
-			timer += deltaTime;
-			frames++;
-			time = System.currentTimeMillis();
-			update(deltaTime);
-			render();
+	TiledSet set;
+	TiledMapLayer map;
+	TiledMapRenderer ren;
+	Texture texture;
 			
-			if(timer >= 1000) {
-				window.setTitle(Integer.toString(frames));
-				frames = 0;
-				timer = 0;
-			}
-		}
+	public static void main(String[] args) {
+		Engine.init(new Main());
 	}
+	
+	public void init() {
+		window = new Window(1000, 500, "Test");
+		window.setInputHandler(Engine.input);
+		Window.setContext(window);
+		camera = new Camera(Engine.renderer);
+				
+		set = new TiledSet();
+		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile0.png")));
+		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile1.png")));
+		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile2.png")));
+		set.addTile(new Tile(new Texture("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\tile3.png")));
+		map = TiledMapLoader.loadSimpleMap("C:\\Users\\Ludwig Bogsveen\\Desktop\\assets\\map.txt", set);
+		map.setTileSize(8, 8);
+		ren = new TiledMapRenderer(Engine.renderer);
+	}
+	
 
 	@Override
 	public void update(float delta) {
 		glfwPollEvents();
-		for(Particle p: particles) {
-			p.update(delta);
-		}
+		camera.lookAt(camera.x-0.6f, -250);
 	}
 
 	@Override
 	public void render() {
+		Engine.renderer.clear();
+		ren.drawTiledMapLayer(map);	
 		window.swapBuffers();
-		renderer.clear();
-		for(Particle p: particles) {
-			p.render(renderer);
-		}
-	}
-
-	class Particle {
-		public float x;
-		public float y;
-		public int width;
-		public int height;
-		
-		public Particle(int x, int y, int width, int height) {
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-		}
-		
-		public void update(float delta) {
-			x += (rand.nextFloat()-0.5f)*10;
-			y += (rand.nextFloat()-0.5f)*10;
-		}
-		
-		public void render(Renderer renderer) {
-			renderer.drawRect((int)x, (int)y, width, height);
-		}
 	}
 }
