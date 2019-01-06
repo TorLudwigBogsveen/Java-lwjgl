@@ -18,8 +18,7 @@ public class Texture {
 	
 	public Texture(String path) {
 		try {
-			System.out.println(Texture.class.getResource("../../../").toString());
-			BufferedImage image = ImageIO.read(Texture.class.getResource(path));
+			BufferedImage image = ImageIO.read(Texture.class.getResource("../../../../"+path));
 			width = image.getWidth();
 			height = image.getHeight();
 			

@@ -58,7 +58,7 @@ public class Main implements Application {
 		};
 		
 		class TextureRenderer extends GameComponent {
-			public Texture texture = new Texture("C:/Users/Ludwig Bogsveen/Desktop/assets/bullethell/null.png");
+			public Texture texture = new Texture("bullethell/null.png");
 			public int width = 64;
 			public int height = 64;
 			public TextureRenderer(Texture texture) {
@@ -71,7 +71,7 @@ public class Main implements Application {
 		
 		GameObject player = new GameObject();
 		player.addComponent(playerScript);
-		player.addComponent(new TextureRenderer(new Texture("res/bullethell/player.png")));
+		player.addComponent(new TextureRenderer(new Texture("bullethell/player.png")));
 		gameScene.addObject(player);
 	}
 

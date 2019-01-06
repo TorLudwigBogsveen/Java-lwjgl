@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="lib" path="libs/jars/lwjgl-glfw.jar" sourcepath="libs/jars/lwjgl-glfw-sources.jar"/>
 	<classpathentry kind="lib" path="libs/jars/lwjgl-openal.jar"/>
 	<classpathentry kind="lib" path="libs/jars/lwjgl-opengl.jar" sourcepath="libs/jars/lwjgl-opengl-sources.jar"/>
