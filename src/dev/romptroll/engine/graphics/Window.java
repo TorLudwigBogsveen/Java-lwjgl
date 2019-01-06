@@ -23,20 +23,22 @@ public class Window implements Disposable {
 	/*Reference to an GLFW window should not be visible by implementations of the Window class*/
 	private long window_ptr;
 	
-	public Window(int width, int height, String title) {
+	public Window(int width, int height, String title, boolean fullscreen) {
 		this.title = title;
-		initWindow(width, height, title);
+		initWindow(width, height, title, fullscreen);
 	}
 	
-	private void initWindow(int width, int height, String title) {
+	private void initWindow(int width, int height, String title, boolean fullscreen) {
 		//TODO only call this method once!
 		if(!glfwInit()) {
 			System.err.println("GLFW wasnt initialized corectly!!!");
 			return;
 		}
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-
-		window_ptr = glfwCreateWindow(width, height, title, 0, 0);
+		if(fullscreen)
+			window_ptr = glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), 0);
+		else 
+			window_ptr = glfwCreateWindow(width, height, title, 0, 0);
 		if(window_ptr == NULL) {
 			System.err.println("Window wasnt initialized corectly!!!");
 			return;

@@ -36,7 +36,7 @@ public class Main implements Application {
 	}
 	
 	public void init() {
-		window = new Window(1000, 500, "Test");
+		window = new Window(1000, 500, "Test", false);
 		window.setInputHandler(Engine.input);
 		Window.setContext(window);
 		camera = new Camera(Engine.renderer);
