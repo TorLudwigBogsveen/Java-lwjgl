@@ -23,8 +23,10 @@ import dev.romptroll.engine.graphics.maps.TiledSet;
 
 public class Main implements Application {
 	
-	private Window window;
-	private Camera camera;
+	Window window;
+	Camera camera;
+	Renderer renderer;
+	Input input;
 	
 	TiledSet set;
 	TiledMapLayer map;
@@ -37,9 +39,10 @@ public class Main implements Application {
 	
 	public void init() {
 		window = new Window(1000, 500, "Test", false);
-		window.setInputHandler(Engine.input);
+		window.setInputHandler(input = new Input());
 		Window.setContext(window);
-		camera = new Camera(Engine.renderer);
+		renderer = new Renderer(window);
+		camera = new Camera(renderer);
 				
 		set = new TiledSet();
 		set.addTile(new Tile(new Texture("tilemap/tile0.png")));
@@ -48,7 +51,7 @@ public class Main implements Application {
 		set.addTile(new Tile(new Texture("tilemap/tile3.png")));
 		map = TiledMapLoader.loadSimpleMap("tilemap/map.txt", set);
 		map.setTileSize(8, 8);
-		ren = new TiledMapRenderer(Engine.renderer);
+		ren = new TiledMapRenderer(renderer);
 	}
 	
 
@@ -60,7 +63,7 @@ public class Main implements Application {
 
 	@Override
 	public void render() {
-		Engine.renderer.clear();
+		renderer.clear();
 		ren.drawTiledMapLayer(map);	
 		window.swapBuffers();
 	}

@@ -4,9 +4,17 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
 	
+	private Window window;
+	
+	public Renderer(Window window) {
+		this.window = window;
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
 	public void drawRect(int x, int y, int width, int height) {
-		float windowWidth = 500;
-		float windowHeight = 250;
+		float windowWidth = window.getWidth();
+		float windowHeight = window.getHeight();
 		float x1 = x/windowWidth;
 		float y1 = y/windowHeight;
 		float x2 = x1+width/windowWidth;
@@ -15,8 +23,8 @@ public class Renderer {
 	}
 	
 	public void drawImage(Texture texture, int x, int y, int width, int height) {
-		float windowWidth = 500;
-		float windowHeight = 250;
+		float windowWidth = window.getWidth();
+		float windowHeight = window.getHeight();
 		float x1 = x/windowWidth;
 		float y1 = y/windowHeight;
 		float x2 = x1+width/windowWidth;
@@ -24,10 +32,10 @@ public class Renderer {
 		glBindTexture(GL_TEXTURE_2D, texture.getID());
 		glEnable(GL_TEXTURE_2D);
 		glBegin(GL_QUADS);
-		glTexCoord2f(1, 1); glVertex2f(x1,y1);
-		glTexCoord2f(0, 1); glVertex2f(x1,y2);
-		glTexCoord2f(0, 0); glVertex2f(x2,y2);
-		glTexCoord2f(1, 0); glVertex2f(x2,y1);
+		glTexCoord2f(1, 0); glVertex2f(x1,y1);
+		glTexCoord2f(0, 0); glVertex2f(x1,y2);
+		glTexCoord2f(0, 1); glVertex2f(x2,y2);
+		glTexCoord2f(1, 1); glVertex2f(x2,y1);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 	}

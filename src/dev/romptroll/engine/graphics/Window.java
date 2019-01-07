@@ -4,8 +4,6 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import java.nio.IntBuffer;
-
 import org.lwjgl.glfw.GLFWWindowCloseCallback;
 import org.lwjgl.opengl.GL;
 
@@ -19,12 +17,16 @@ public class Window implements Disposable {
 	/*Represents the title and size of the current window.
 	 *Variables should be not be accessed directly instead use the setters and getters associated with the variables.*/
 	private String title;
+	private int width;
+	private int height;
 	
 	/*Reference to an GLFW window should not be visible by implementations of the Window class*/
 	private long window_ptr;
 	
 	public Window(int width, int height, String title, boolean fullscreen) {
 		this.title = title;
+		this.width = width;
+		this.height = height;
 		initWindow(width, height, title, fullscreen);
 	}
 	
@@ -34,7 +36,7 @@ public class Window implements Disposable {
 			System.err.println("GLFW wasnt initialized corectly!!!");
 			return;
 		}
-		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 		if(fullscreen)
 			window_ptr = glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), 0);
 		else 
@@ -61,21 +63,17 @@ public class Window implements Disposable {
 	}
 	
 	public int getWidth() {
-		IntBuffer width = IntBuffer.allocate(1);
-		IntBuffer height = IntBuffer.allocate(1);;
-		glfwGetWindowSize(window_ptr, width, height);
-		return width.get(0);
+		return width;
 
 	}
 	
 	public int getHeight() {
-		IntBuffer width = IntBuffer.allocate(1);
-		IntBuffer height = IntBuffer.allocate(1);
-		glfwGetWindowSize(window_ptr, width, height);
-		return height.get(0);
+		return height;
 	}
 	
 	public void rezise(int width, int height) {
+		this.width = width;
+		this.height = height;
 		glfwSetWindowSize(window_ptr, width, height);
 	}
 	

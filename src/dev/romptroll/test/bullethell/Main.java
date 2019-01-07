@@ -25,13 +25,35 @@ public class Main implements Application {
 	}
 	
 	public void init() {
-		window = new Window(1000, 500, "Test", true);
-		window.setInputHandler(input = (Input) Engine.input);
+		window = new Window(1920, 1080, "Test", true);
+		window.setInputHandler(input = new Input());
 		Window.setContext(window);
-		renderer = Engine.renderer;
+		renderer = new Renderer(window);
 		renderer.clearColor(255, 255, 255, 255);
 		camera = new Camera(renderer);
 		gameScene = new Scene();
+		
+		class TextureRenderer extends GameComponent {
+			Texture texture = new Texture("bullethell/null.png");
+			int width = 64;
+			int height = 64;
+			TextureRenderer(Texture texture) {
+				if(texture != null) this.texture = texture;
+			}
+			public void render() {
+				renderer.drawImage(texture, (int)parent.transform.x, (int)parent.transform.y, width, height);
+			}
+		};
+		
+		class BulletScript extends GameComponent {
+			TextureRenderer ren;
+			float velX;
+			float velY;
+			public void update(float delta) {
+				parent.transform.x += velX;
+				parent.transform.y += velY;
+			}
+		}
 		
 		GameComponent playerScript = new GameComponent() {
 			public void update(float delta) {
@@ -39,33 +61,18 @@ public class Main implements Application {
 				renderer.rotate(angle);
 				
 				if(input.keys[GLFW_MOUSE_BUTTON_LAST]) {
-					
+					GameObject bullet = new GameObject();
+					BulletScript script = new BulletScript();
+					script.velX = 0;
+					script.velY = 0.1f;
+					bullet.addComponent(script);
+					bullet.addComponent(new TextureRenderer(new Texture("bullethell/")));
+					gameScene.addObject(bullet);
 				}
-				
-				if(input.keys[GLFW_KEY_W]) {
-					parent.transform.y+=2;
-				}
-				if(input.keys[GLFW_KEY_S]) {
-					parent.transform.y-=2;
-				}
-				if(input.keys[GLFW_KEY_A]) {
-					parent.transform.x-=2;
-				}
-				if(input.keys[GLFW_KEY_D]) {
-					parent.transform.x+=2;
-				}
-			}
-		};
-		
-		class TextureRenderer extends GameComponent {
-			public Texture texture = new Texture("bullethell/null.png");
-			public int width = 64;
-			public int height = 64;
-			public TextureRenderer(Texture texture) {
-				if(texture != null) this.texture = texture;
-			}
-			public void render() {
-				Engine.renderer.drawImage(texture, (int)parent.transform.x, (int)parent.transform.y, width, height);
+				if(input.keys[GLFW_KEY_W]) parent.transform.y+=2;
+				if(input.keys[GLFW_KEY_S]) parent.transform.y-=2;
+				if(input.keys[GLFW_KEY_A]) parent.transform.x-=2;
+				if(input.keys[GLFW_KEY_D]) parent.transform.x+=2;
 			}
 		};
 		
@@ -79,6 +86,7 @@ public class Main implements Application {
 	@Override
 	public void update(float delta) {
 		glfwPollEvents();
+		if(input.keys[GLFW_KEY_ESCAPE]) System.exit(0);
 		gameScene.update(delta);
 	}
 

@@ -1,14 +1,7 @@
 package dev.romptroll.engine.core;
 
-import dev.romptroll.engine.graphics.Renderer;
-
-public class Engine implements Runnable {
-	public static Renderer renderer;
-	public static InputHandler input;
-	
+public class Engine implements Runnable {	
 	public static void init(Application app) {
-		renderer = new Renderer();
-		input = new Input();
 		new Thread(new Engine(app), "GameLoop").start();
 	}	
 	
