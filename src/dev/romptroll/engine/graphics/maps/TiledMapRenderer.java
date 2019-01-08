@@ -20,7 +20,8 @@ public class TiledMapRenderer {
 		for(int i = 0; i < layer.getWidth(); i++) {
 			for(int j = 0; j < layer.getHeight(); j++) {
 				Tile tile = layer.getTile(i, j);
-				renderer.setColor(tile.color[0], tile.color[1], tile.color[2]);
+				int[] colors = layer.getColor(i, j);
+				renderer.setColor(colors[0], colors[1], colors[2]);
 				renderer.drawImage(tile.texture, i*layer.getTileWidth(), j*layer.getTileHeight(), layer.getTileWidth(), layer.getTileHeight());
 			}
 		}
