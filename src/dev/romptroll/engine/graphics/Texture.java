@@ -68,9 +68,9 @@ public class Texture {
 	public Texture crop(int x, int y, int width, int height) {
 		ByteBuffer data = BufferUtils.createByteBuffer(width*height*4);
 		pixels.rewind();
-		for(int j = 0; j < height; j++) {
-			for(int i = 0; i < width; i++) {
-				int index = ((i+x)+(j+y)*this.width)*4;
+		for(int i = 0; i < width; i++) {
+			for(int j = 0; j < height; j++) {
+				int index = ((j+y)+(i+x)*this.width)*4;
 				data.put(pixels.get(index+0));
 				data.put(pixels.get(index+1));
 				data.put(pixels.get(index+2));

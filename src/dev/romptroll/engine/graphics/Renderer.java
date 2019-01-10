@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Renderer {
 	
 	private Window window;
+	private Font font;
 	
 	public Renderer(Window window) {
 		this.window = window;
@@ -40,6 +41,17 @@ public class Renderer {
 		glDisable(GL_TEXTURE_2D);
 	}
 	
+	public void drawString(int x, int y, String string) {
+		if(font == null) {
+			System.out.println("TRIED TO DRAW TO STRING WITHOUT A FONT SELECTED!!!");
+			return;
+		}
+		Texture[] textures = font.getString(string);
+		for(int i = 0; i < string.length(); i++) {
+			drawImage(textures[i], x+font.width*i, y, font.width, font.height);
+		}
+	}
+	
 	public void setColor(int r, int g, int b) {
 		glColor3f((float)r/256, (float)g/256, (float)b/256);
 	}
@@ -70,5 +82,13 @@ public class Renderer {
 		glPopMatrix();
 		glPushMatrix();
 		glRotatef(angle, 0, 0, 1);
+	}
+	
+	public void setFont(Font font) {
+		this.font = font;
+	}
+	
+	public Font getFont() {
+		return font;
 	}
 }

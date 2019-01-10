@@ -1,11 +1,27 @@
 package dev.romptroll.engine.graphics;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Font {
-
-	public Font(Map<String, Texture> data) {
 	
+	private Map<Character, Texture> data = new HashMap<Character, Texture>();
+	public int width = 64;
+	public int height = 64;
+	
+	public Font(Map<Character, Texture> data) {
+		this.data = data;
 	}
-
+	
+	public Texture getCharacter(char character) {
+		return data.get(character);
+	}
+	
+	public Texture[] getString(String string) {
+		Texture[] textures = new Texture[string.length()];
+		for(int i = 0; i < string.length(); i++) {
+			textures[i]  = data.get(string.charAt(i));
+		}
+		return textures;
+	}
 }

@@ -1,5 +1,7 @@
 package dev.romptroll.engine.scene;
 
+import dev.romptroll.engine.graphics.Renderer;
+
 public class GameComponent {
 	
 	protected GameObject parent;
@@ -8,7 +10,7 @@ public class GameComponent {
 		
 	}
 
-	public void render() {
+	public void render(Renderer ren) {
 		
 	}
 

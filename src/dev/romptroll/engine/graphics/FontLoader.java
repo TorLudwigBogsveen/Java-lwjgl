@@ -8,21 +8,22 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FontLoader {
-	public static Font loadFont() {
-		String path = "";
+	public static Font loadFont(String path) {
 		Font font = null;
 		try {
-			Map<String, Texture> data = new HashMap<String, Texture>();
-			Scanner scan = new Scanner(new File(FontLoader.class.getResource("../../../../"+path).toURI().toString()));
-			Texture atlas = new Texture(path);
+			Map<Character, Texture> data = new HashMap<Character, Texture>();
+			Scanner scan = new Scanner(new File(FontLoader.class.getResource("../../../../"+path+".txt").toURI().getPath()));
+			Texture atlas = new Texture(path+".png");
+			int w = scan.nextInt();
+			int h = scan.nextInt();
 			while(scan.hasNext()) {
-				String key = scan.next();
+				char key = scan.next().charAt(0);
 				int x = scan.nextInt();
 				int y = scan.nextInt();
-				int w = scan.nextInt();
-				int h = scan.nextInt();
+				data.put(key, atlas.crop(x*w, y*h, w, h));
 			}
 			font = new Font(data);
+			scan.close();
 		} catch (FileNotFoundException | URISyntaxException e) {
 			e.printStackTrace();
 		}

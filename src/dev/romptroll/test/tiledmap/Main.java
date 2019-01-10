@@ -1,4 +1,4 @@
-package dev.romptroll.test;
+package dev.romptroll.test.tiledmap;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;

@@ -3,11 +3,13 @@ package dev.romptroll.engine.scene;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.romptroll.engine.graphics.Renderer;
 import dev.romptroll.engine.scene.components.Transform;
 
 public class GameObject {
 	public List<GameComponent> components;
 	public Transform transform;
+		 
 	
 	public GameObject() {
 		components = new ArrayList<GameComponent>();
@@ -20,9 +22,9 @@ public class GameObject {
 		}
 	}
 	
-	public void render() {
+	public void render(Renderer renderer) {
 		for(GameComponent c: components) {
-			c.render();
+			c.render(renderer);
 		}
 	}
 	

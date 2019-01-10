@@ -31,7 +31,7 @@ public class Main implements Application {
 		renderer = new Renderer(window);
 		renderer.clearColor(255, 255, 255, 255);
 		camera = new Camera(renderer);
-		gameScene = new Scene();
+		gameScene = new Scene(renderer);
 		
 		class TextureRenderer extends GameComponent {
 			Texture texture = new Texture("bullethell/null.png");
@@ -57,15 +57,14 @@ public class Main implements Application {
 		
 		GameComponent playerScript = new GameComponent() {
 			public void update(float delta) {
-				renderer.translate(parent.transform.x, parent.transform.y);
-				float angle = (float) Math.toDegrees(Math.atan2((parent.transform.x+(window.getWidth()/2))-input.mouseX, (parent.transform.y+(window.getHeight()/2))-input.mouseY));
-				renderer.rotate(angle);
+				//renderer.translate(-parent.transform.x, -parent.transform.y);
+				parent.transform.rotate((float) Math.toDegrees(Math.atan2((parent.transform.x+(window.getWidth()/2))-input.mouseX, (parent.transform.y+(window.getHeight()/2))-input.mouseY)));
 				
 				if(input.buttons[GLFW_MOUSE_BUTTON_LEFT]) {
 					GameObject bullet = new GameObject();
 					BulletScript script = new BulletScript();
 					script.velX = 0;
-					script.velY = 0.1f;
+					script.velY = 3f;
 					bullet.addComponent(script);
 					bullet.addComponent(new TextureRenderer(new Texture("bullethell/bullet.png")));
 					gameScene.addObject(bullet);
