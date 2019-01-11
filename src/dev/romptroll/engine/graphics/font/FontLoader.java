@@ -1,4 +1,4 @@
-package dev.romptroll.engine.graphics;
+package dev.romptroll.engine.graphics.font;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import dev.romptroll.engine.graphics.Texture;
 
 public class FontLoader {
 	public static Font loadFont(String path) {

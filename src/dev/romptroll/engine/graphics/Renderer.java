@@ -2,6 +2,8 @@ package dev.romptroll.engine.graphics;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import dev.romptroll.engine.graphics.font.Font;
+
 public class Renderer {
 	
 	private Window window;
@@ -11,6 +13,12 @@ public class Renderer {
 		this.window = window;
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		float windowWidth = window.getWidth()/2;
+		float windowHeight = window.getHeight()/2;
+		float x1 = -(window.getWidth()/2)/windowWidth;
+		float y1 = -(window.getHeight()/2)/windowHeight;
+		glTranslatef(x1, y1, 0);
 	}
 	
 	public void drawRect(int x, int y, int width, int height) {

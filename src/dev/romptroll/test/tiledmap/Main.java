@@ -10,7 +10,6 @@ import java.util.Random;
 import dev.romptroll.engine.core.Application;
 import dev.romptroll.engine.core.Engine;
 import dev.romptroll.engine.core.Input;
-import dev.romptroll.engine.graphics.Camera;
 import dev.romptroll.engine.graphics.Renderer;
 import dev.romptroll.engine.graphics.Texture;
 import dev.romptroll.engine.graphics.Window;
@@ -20,6 +19,7 @@ import dev.romptroll.engine.graphics.maps.TiledMapLayer;
 import dev.romptroll.engine.graphics.maps.TiledMapLoader;
 import dev.romptroll.engine.graphics.maps.TiledMapRenderer;
 import dev.romptroll.engine.graphics.maps.TiledSet;
+import dev.romptroll.engine.scene.components.Camera;
 
 public class Main implements Application {
 	

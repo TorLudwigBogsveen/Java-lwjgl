@@ -1,7 +1,9 @@
-package dev.romptroll.engine.graphics;
+package dev.romptroll.engine.graphics.font;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import dev.romptroll.engine.graphics.Texture;
 
 public class Font {
 	

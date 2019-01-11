@@ -4,13 +4,13 @@ import static org.lwjgl.glfw.GLFW.*;
 import dev.romptroll.engine.core.Application;
 import dev.romptroll.engine.core.Engine;
 import dev.romptroll.engine.core.Input;
-import dev.romptroll.engine.graphics.Camera;
 import dev.romptroll.engine.graphics.Renderer;
 import dev.romptroll.engine.graphics.Texture;
 import dev.romptroll.engine.graphics.Window;
 import dev.romptroll.engine.scene.GameComponent;
 import dev.romptroll.engine.scene.GameObject;
 import dev.romptroll.engine.scene.Scene;
+import dev.romptroll.engine.scene.components.Camera;
 
 public class Main implements Application {
 	

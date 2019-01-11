@@ -5,10 +5,10 @@ import org.lwjgl.glfw.GLFW;
 import dev.romptroll.engine.core.Application;
 import dev.romptroll.engine.core.Engine;
 import dev.romptroll.engine.core.Input;
-import dev.romptroll.engine.graphics.FontLoader;
 import dev.romptroll.engine.graphics.Renderer;
 import dev.romptroll.engine.graphics.Texture;
 import dev.romptroll.engine.graphics.Window;
+import dev.romptroll.engine.graphics.font.FontLoader;
 
 public class Main implements Application {
 	public static void main(String[] args) {

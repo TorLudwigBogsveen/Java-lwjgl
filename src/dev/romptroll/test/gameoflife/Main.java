@@ -40,7 +40,6 @@ public class Main implements Application {
 	public void render() {
 		ren.clearColor(0, 255, 255, 255);
 		ren.clear();
-		ren.translate(-win.getWidth()/2, -win.getHeight()/2);
 		grid.render(ren);
 		win.swapBuffers();
 	}

@@ -8,6 +8,8 @@ public class Engine implements Runnable {
 	private Application app;
 	
 	private Engine(Application app) {
+		if(app == null)
+			throw(new NullPointerException("Application cannot be NULL!!!"));
 		this.app = app;
 	}
 

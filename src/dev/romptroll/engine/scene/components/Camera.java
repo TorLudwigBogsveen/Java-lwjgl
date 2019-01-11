@@ -1,6 +1,9 @@
-package dev.romptroll.engine.graphics;
+package dev.romptroll.engine.scene.components;
 
-public class Camera {
+import dev.romptroll.engine.graphics.Renderer;
+import dev.romptroll.engine.scene.GameComponent;
+
+public class Camera extends GameComponent {
 	public float x, y;
 	public Renderer renderer;
 	
