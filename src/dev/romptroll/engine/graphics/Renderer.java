@@ -14,8 +14,8 @@ public class Renderer {
 	}
 	
 	public void drawRect(int x, int y, int width, int height) {
-		float windowWidth = window.getWidth();
-		float windowHeight = window.getHeight();
+		float windowWidth = window.getWidth()/2;
+		float windowHeight = window.getHeight()/2;
 		float x1 = x/windowWidth;
 		float y1 = y/windowHeight;
 		float x2 = x1+width/windowWidth;
@@ -24,8 +24,8 @@ public class Renderer {
 	}
 	
 	public void drawImage(Texture texture, int x, int y, int width, int height) {
-		float windowWidth = window.getWidth();
-		float windowHeight = window.getHeight();
+		float windowWidth = window.getWidth()/2;
+		float windowHeight = window.getHeight()/2;
 		float x1 = x/windowWidth;
 		float y1 = y/windowHeight;
 		float x2 = x1+width/windowWidth;
@@ -69,8 +69,8 @@ public class Renderer {
 	}
 	
 	public void translate(float x, float y) {
-		float windowWidth = 500;
-		float windowHeight = 250;
+		float windowWidth = window.getWidth()/2;
+		float windowHeight = window.getHeight()/2;
 		float x1 = x/windowWidth;
 		float y1 = y/windowHeight;
 		glPopMatrix();
@@ -82,6 +82,14 @@ public class Renderer {
 		glPopMatrix();
 		glPushMatrix();
 		glRotatef(angle, 0, 0, 1);
+	}
+	
+	public void pushMatric() {
+		glPushMatrix();
+	}
+	
+	public void popMatric() {
+		glPopMatrix();
 	}
 	
 	public void setFont(Font font) {

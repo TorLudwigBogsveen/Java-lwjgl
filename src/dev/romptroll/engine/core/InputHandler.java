@@ -21,13 +21,13 @@ public abstract class InputHandler implements Disposable {
 		public void invoke(long window, int key, int scancode, int action, int mods) {
 			switch(action) {
 			case GLFW.GLFW_PRESS:
-				keyPressed(key);
+				keyPressed(key, scancode);
 				break;
 			case GLFW.GLFW_RELEASE:
-				keyReleased(key);
+				keyReleased(key, scancode);
 				break;
 			case GLFW.GLFW_REPEAT:
-				keyRepeated(key);
+				keyRepeated(key, scancode);
 				break;
 			default:
 				System.err.println("Key action not defined!");
@@ -76,11 +76,11 @@ public abstract class InputHandler implements Disposable {
 		mouseButtonCallback.close();
 	}
 	
-	protected abstract void keyPressed(int key);
+	protected abstract void keyPressed(int key, int scancode);
 
-	protected abstract void keyReleased(int key);
+	protected abstract void keyReleased(int key, int scancode);
 	
-	protected abstract void keyRepeated(int key);
+	protected abstract void keyRepeated(int key, int scancode);
 	
 	protected abstract void mouseMoved(double xpos, double ypos);
 	

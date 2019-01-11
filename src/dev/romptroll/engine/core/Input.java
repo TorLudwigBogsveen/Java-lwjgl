@@ -9,17 +9,17 @@ public class Input extends InputHandler {
 	public int mouseY;
 
 	@Override
-	protected void keyPressed(int key) {
+	protected void keyPressed(int key, int scancode) {
 		keys[key] = true;
 	}
 
 	@Override
-	protected void keyReleased(int key) {
+	protected void keyReleased(int key, int scancode) {
 		keys[key] = false;
 	}
 
 	@Override
-	protected void keyRepeated(int key) {
+	protected void keyRepeated(int key, int scancode) {
 		
 	}
 

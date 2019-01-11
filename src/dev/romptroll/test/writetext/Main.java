@@ -1,4 +1,4 @@
-package dev.romptroll.test.fonttest;
+package dev.romptroll.test.writetext;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -18,7 +18,7 @@ public class Main implements Application {
 	Window win;
 	Renderer ren;
 	Texture atlas;
-	Input input;
+	WriteInput input;
 	
 	@Override
 	public void init() {
@@ -26,7 +26,9 @@ public class Main implements Application {
 		Window.setContext(win);
 		ren = new Renderer(win);
 		ren.setFont(FontLoader.loadFont("fonttest/font"));
-		win.setInputHandler(input = new Input());
+		ren.getFont().width = 16;
+		ren.getFont().height = 16;
+		win.setInputHandler(input = new WriteInput());
 	}
 
 	@Override
@@ -38,16 +40,7 @@ public class Main implements Application {
 	public void render() {
 		ren.clearColor(0, 255, 255, 255);
 		ren.clear();
-		ren.setColor(0, 155, 0);
-		ren.drawString(-400, 0, "X:"+Integer.toString(input.mouseX));;
-		ren.drawString(-400, 64, "Y:"+Integer.toString(input.mouseY));;
-		ren.setColor(255, 0, 0);
-		ren.drawString(-400, 128, "GAY!!!!");
-		ren.setColor(0, 0, 255);
-		ren.drawString(-400, 128+64, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-		ren.setColor(255, 155, 0);
-		ren.drawString(-400, 256, "abcdefghijklmnopqrstuvwxyz");
-
+		ren.drawString(0, 0, input.text);
 		win.swapBuffers();
 	}
 }

@@ -35,13 +35,13 @@ public class Main implements Application {
 		
 		class TextureRenderer extends GameComponent {
 			Texture texture = new Texture("bullethell/null.png");
-			int width = 128;
-			int height = 128;
+			int width = 64;
+			int height = 64;
 			TextureRenderer(Texture texture) {
 				if(texture != null) this.texture = texture;
 			}
-			public void render() {
-				renderer.drawImage(texture, (int)parent.transform.x, (int)parent.transform.y, width, height);
+			public void render(Renderer ren) {
+				ren.drawImage(texture, (int)parent.transform.x, (int)parent.transform.y, width, height);
 			}
 		};
 		
@@ -57,7 +57,6 @@ public class Main implements Application {
 		
 		GameComponent playerScript = new GameComponent() {
 			public void update(float delta) {
-				//renderer.translate(-parent.transform.x, -parent.transform.y);
 				parent.transform.rotate((float) Math.toDegrees(Math.atan2((parent.transform.x+(window.getWidth()/2))-input.mouseX, (parent.transform.y+(window.getHeight()/2))-input.mouseY)));
 				
 				if(input.buttons[GLFW_MOUSE_BUTTON_LEFT]) {
@@ -67,6 +66,8 @@ public class Main implements Application {
 					script.velY = 3f;
 					bullet.addComponent(script);
 					bullet.addComponent(new TextureRenderer(new Texture("bullethell/bullet.png")));
+					bullet.transform.x = parent.transform.x;
+					bullet.transform.y = parent.transform.y;
 					gameScene.addObject(bullet);
 				}
 				if(input.keys[GLFW_KEY_W]) parent.transform.y+=2;

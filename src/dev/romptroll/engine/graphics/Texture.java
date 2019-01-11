@@ -20,7 +20,6 @@ public class Texture {
 	
 	public Texture(String path) {
 		try {
-			System.out.println(path);
 			BufferedImage image = ImageIO.read(Texture.class.getResource("../../../../"+path));
 			width = image.getWidth();
 			height = image.getHeight();

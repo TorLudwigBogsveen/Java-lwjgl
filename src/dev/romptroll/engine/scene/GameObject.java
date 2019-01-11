@@ -23,9 +23,12 @@ public class GameObject {
 	}
 	
 	public void render(Renderer renderer) {
+		renderer.pushMatric();
+		renderer.rotate(transform.rotation);
 		for(GameComponent c: components) {
 			c.render(renderer);
 		}
+		renderer.popMatric();
 	}
 	
 	public void addComponent(GameComponent component) {

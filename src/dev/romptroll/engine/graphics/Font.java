@@ -6,8 +6,8 @@ import java.util.Map;
 public class Font {
 	
 	private Map<Character, Texture> data = new HashMap<Character, Texture>();
-	public int width = 64;
-	public int height = 64;
+	public int width = 32;
+	public int height = 32;
 	
 	public Font(Map<Character, Texture> data) {
 		this.data = data;

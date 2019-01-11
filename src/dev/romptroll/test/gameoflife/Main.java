@@ -1,13 +1,11 @@
-package dev.romptroll.test.fonttest;
+package dev.romptroll.test.gameoflife;
 
 import org.lwjgl.glfw.GLFW;
 
 import dev.romptroll.engine.core.Application;
 import dev.romptroll.engine.core.Engine;
 import dev.romptroll.engine.core.Input;
-import dev.romptroll.engine.graphics.FontLoader;
 import dev.romptroll.engine.graphics.Renderer;
-import dev.romptroll.engine.graphics.Texture;
 import dev.romptroll.engine.graphics.Window;
 
 public class Main implements Application {
@@ -17,37 +15,33 @@ public class Main implements Application {
 	
 	Window win;
 	Renderer ren;
-	Texture atlas;
+	Grid grid;
 	Input input;
 	
 	@Override
 	public void init() {
-		win = new Window(1000, 500, "Font Test", false);
+		win = new Window(1920, 1080, "Font Test", true);
 		Window.setContext(win);
-		ren = new Renderer(win);
-		ren.setFont(FontLoader.loadFont("fonttest/font"));
 		win.setInputHandler(input = new Input());
+		ren = new Renderer(win);
+		grid = new Grid(win.getWidth()/1, win.getHeight()/1, 1, 1);
 	}
 
 	@Override
 	public void update(float delta) {
 		GLFW.glfwPollEvents();
+		grid.update(delta);
+		if(input.keys[GLFW.GLFW_KEY_ESCAPE]) {
+			System.exit(0);
+		}
 	}
 
 	@Override
 	public void render() {
 		ren.clearColor(0, 255, 255, 255);
 		ren.clear();
-		ren.setColor(0, 155, 0);
-		ren.drawString(-400, 0, "X:"+Integer.toString(input.mouseX));;
-		ren.drawString(-400, 64, "Y:"+Integer.toString(input.mouseY));;
-		ren.setColor(255, 0, 0);
-		ren.drawString(-400, 128, "GAY!!!!");
-		ren.setColor(0, 0, 255);
-		ren.drawString(-400, 128+64, "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-		ren.setColor(255, 155, 0);
-		ren.drawString(-400, 256, "abcdefghijklmnopqrstuvwxyz");
-
+		ren.translate(-win.getWidth()/2, -win.getHeight()/2);
+		grid.render(ren);
 		win.swapBuffers();
 	}
 }
